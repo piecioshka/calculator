@@ -14,7 +14,7 @@
             <input class="time">
           </div>
           <label>
-            <input type="checkbox">
+            <input class="insurance" type="checkbox">
             <span>Z ubezpieczeniem</span>
           </label>
         </div>
@@ -23,7 +23,20 @@
           <div class="totalCost">
             <div>
               Oprocentowanie nominalne w skali roku:
-              <span class="oprValue">{{oprocentowanieValue}}%</span>
+              <span class="oprValue">{{interestValue}}%</span>
+            </div>
+            <div>
+              Prowizja:
+              <span class="commValue">{{commissionValue}}%</span>
+            </div>
+            <div>
+              Calkowity koszt kredytu:
+              <span class="loanValue">{{totalLoanValue}}%</span>
+            </div>
+            <div>
+              Miesięczna skadka ubezpieczeniowa:
+              <span class="insValue">{{insuranceValue}}%</span>
+              (visible if insurance is checked)
             </div>
           </div>
         </div>
@@ -35,12 +48,13 @@
 <script>
 export default {
   methods: {},
-  computed: {},
+  computed: {
+    leanValue() {}
+  },
 
-  oprocentowanieValue() {}
+  interestValue() {}
 };
 </script>
 
 <style>
 </style>
-
