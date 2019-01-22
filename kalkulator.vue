@@ -51,8 +51,8 @@
 export default {
   data() {
     return {
-      moneyAmount: "",
-      timeAmount: "",
+      moneyAmount: "500",
+      timeAmount: "3",
       checked: false
     };
   },
@@ -60,6 +60,9 @@ export default {
   computed: {
     interestValue: function() {
       return this.moneyAmount * this.timeAmount * 0.01;
+    },
+    commissionValue: function() {
+      return this.moneyAmount * this.timeAmount * 0.02;
     },
     interestValue: function() {
       if (this.moneyAmount <= 5000) {
@@ -70,6 +73,36 @@ export default {
         return (this.interestValue = 8.99);
       } else if (this.moneyAmount > 50000) {
         return (this.interestValue = 7.99);
+      }
+    },
+    commissionValue: function() {
+      if (
+        this.moneyAmount >= 500 &&
+        this.moneyAmount <= 5000 &&
+        this.timeAmount >= 3 &&
+        this.timeAmount <= 96
+      ) {
+        return (this.commissionValue = 6.99);
+      } else if (
+        this.moneyAmount > 5000 &&
+        this.moneyAmount <= 15000 &&
+        this.timeAmount >= 3 &&
+        this.timeAmount <= 96
+      ) {
+        return (this.commissionValue = 6.49);
+      } else if (
+        this.moneyAmount > 15000 &&
+        this.moneyAmount <= 30000 &&
+        this.timeAmount >= 3 &&
+        this.timeAmount <= 96
+      ) {
+        return (this.commissionValue = 5.49);
+      } else if (this.moneyAmount > 30000 && this.moneyAmount <= 50000) {
+        return (this.commissionValue = 4.99);
+      } else if (this.moneyAmount > 50000 && this.moneyAmount <= 100000) {
+        return (this.commissionValue = 4.49);
+      } else if (this.moneyAmount > 100000) {
+        return (this.commissionValue = 3.99);
       }
     }
   }
