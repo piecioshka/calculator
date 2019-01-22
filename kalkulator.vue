@@ -13,10 +13,13 @@
           <div class="timeNeeded">
             <input v-model="timeAmount" class="time">
           </div>
-          <label>
-            <input class="insurance" type="checkbox">
-            <span>Z ubezpieczeniem</span>
-          </label>
+          <div id="insurance-checkbox">
+            <div class="box">
+              <label>
+                <input v-model="checked" type="checkbox">Z ubezpieczeniem
+              </label>
+            </div>
+          </div>
         </div>
         <div class="col-sm-4">
           <h3>Miesięczna rata</h3>
@@ -33,10 +36,9 @@
               Calkowity koszt kredytu:
               <span class="loanValue">{{totalLoanValue}}%</span>
             </div>
-            <div>
+            <div v-if="checked" class="insValue">
               Miesięczna skadka ubezpieczeniowa:
-              <span class="insValue">{{insuranceValue}}%</span>
-              (visible if insurance is checked)
+              <span>{{insuranceValue}}%</span>
             </div>
           </div>
         </div>
@@ -47,19 +49,20 @@
 
 <script>
 export default {
-    data() {
-        return {
-            moneyAmount : '',
-            timeAmount : ''
-        }
-    },
-    methods: {
-    },
-    computed: {
-        interestValue: function(){
-            return this.moneyAmount * this.timeAmount * 0.01
-        }
+  el: "#insurance-checkbox",
+  data() {
+    return {
+      moneyAmount: "10",
+      timeAmount: "4",
+      checked: false
+    };
   },
+  methods: {},
+  computed: {
+    interestValue: function() {
+      return this.moneyAmount * this.timeAmount * 0.01;
+    }
+  }
 };
 </script>
 
