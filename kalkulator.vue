@@ -7,11 +7,11 @@
           <h1>Pierwszy kredyt gotówkowy</h1>
           <h2>Ile pieniędzy potrzebujesz?</h2>
           <div class="moneyNeeded">
-            <input class="money">
+            <input v-model="moneyAmount" class="money">
           </div>
           <h3>W jakim czasie chcesz splacić?</h3>
           <div class="timeNeeded">
-            <input class="time">
+            <input v-model="timeAmount" class="time">
           </div>
           <label>
             <input class="insurance" type="checkbox">
@@ -23,7 +23,7 @@
           <div class="totalCost">
             <div>
               Oprocentowanie nominalne w skali roku:
-              <span class="oprValue">{{interestValue}}%</span>
+              <span class="intValue">{{interestValue}}%</span>
             </div>
             <div>
               Prowizja:
@@ -47,12 +47,19 @@
 
 <script>
 export default {
-  methods: {},
-  computed: {
-    leanValue() {}
+    data() {
+        return {
+            moneyAmount : '',
+            timeAmount : ''
+        }
+    },
+    methods: {
+    },
+    computed: {
+        interestValue: function(){
+            return this.moneyAmount * this.timeAmount * 0.01
+        }
   },
-
-  interestValue() {}
 };
 </script>
 
