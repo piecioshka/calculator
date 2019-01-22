@@ -49,11 +49,10 @@
 
 <script>
 export default {
-  el: "#insurance-checkbox",
   data() {
     return {
-      moneyAmount: "10",
-      timeAmount: "4",
+      moneyAmount: "",
+      timeAmount: "",
       checked: false
     };
   },
@@ -61,10 +60,20 @@ export default {
   computed: {
     interestValue: function() {
       return this.moneyAmount * this.timeAmount * 0.01;
+    },
+    interestValue: function() {
+      if (this.moneyAmount <= 5000) {
+        return (this.interestValue = 9.99);
+      } else if (this.moneyAmount > 5000 && this.moneyAmount <= 15000) {
+        return (this.interestValue = 9.49);
+      } else if (this.moneyAmount > 15000 && this.moneyAmount <= 50000) {
+        return (this.interestValue = 8.99);
+      } else if (this.moneyAmount > 50000) {
+        return (this.interestValue = 7.99);
+      }
     }
   }
 };
 </script>
-
 <style>
 </style>
