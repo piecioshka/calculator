@@ -122,22 +122,22 @@ export default {
       if (
         this.value2 >= 500 &&
         this.value2 <= 5000 &&
-        this.timeAmount >= 3 &&
-        this.timeAmount <= 96
+        this.value3 >= 3 &&
+        this.value3 <= 96
       ) {
         return (this.commissionValue = 6.99);
       } else if (
         this.value2 > 5000 &&
         this.value2 <= 15000 &&
-        this.timeAmount >= 3 &&
-        this.timeAmount <= 96
+        this.value3 >= 3 &&
+        this.value3 <= 96
       ) {
         return (this.commissionValue = 6.49);
       } else if (
         this.value2 > 15000 &&
         this.value2 <= 30000 &&
-        this.timeAmount >= 3 &&
-        this.timeAmount <= 96
+        this.value3 >= 3 &&
+        this.value3 <= 96
       ) {
         return (this.commissionValue = 5.49);
       } else if (this.value2 > 30000 && this.value2 <= 50000) {
