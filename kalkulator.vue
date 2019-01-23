@@ -1,6 +1,16 @@
 <template>
   <div id="mbank-app">
-    <div class="jumbotron text-center"></div>
+    <div class="jumbotron text-center">
+      <VueSlideBar
+        v-model="value2"
+        :min="500"
+        :max="150000"
+        :processStyle="slider.processStyle"
+        :lineHeight="slider.lineHeight"
+        :tooltipStyles="{ backgroundColor: 'red', borderColor: 'red' }"
+      ></VueSlideBar>
+      <h2>Value: {{value2}}</h2>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-sm-8">
@@ -22,7 +32,10 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <h3>Miesięczna rata</h3>
+          <h3>
+            Miesięczna rata
+            <span class="monthlyValue">{{monthlyLoanValue}}</span>
+          </h3>
           <div class="totalCost">
             <div>
               Oprocentowanie nominalne w skali roku:
@@ -48,22 +61,27 @@
 </template>
 
 <script>
+import VueSlideBar from "vue-slide-bar";
 export default {
   data() {
     return {
-      moneyAmount: "500",
-      timeAmount: "3",
-      checked: false
+      moneyAmount: "100000",
+      timeAmount: "100",
+      checked: false,
+      value2: 1,
+      slider: {
+        lineHeight: 10,
+        processStyle: {
+          backgroundColor: "red"
+        }
+      }
     };
   },
   methods: {},
+  components: {
+    VueSlideBar
+  },
   computed: {
-    interestValue: function() {
-      return this.moneyAmount * this.timeAmount * 0.01;
-    },
-    commissionValue: function() {
-      return this.moneyAmount * this.timeAmount * 0.02;
-    },
     interestValue: function() {
       if (this.moneyAmount <= 5000) {
         return (this.interestValue = 9.99);
