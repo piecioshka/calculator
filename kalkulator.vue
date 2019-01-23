@@ -1,27 +1,31 @@
 <template>
   <div id="mbank-app">
-    <div class="jumbotron text-center">
-      <VueSlideBar
-        v-model="value2"
-        :min="500"
-        :max="150000"
-        :processStyle="slider.processStyle"
-        :lineHeight="slider.lineHeight"
-        :tooltipStyles="{ backgroundColor: 'red', borderColor: 'red' }"
-      ></VueSlideBar>
-      <h2>Value: {{value2}}</h2>
-    </div>
+    <div class="jumbotron text-center"></div>
     <div class="container">
       <div class="row">
         <div class="col-sm-8">
           <h1>Pierwszy kredyt gotówkowy</h1>
           <h2>Ile pieniędzy potrzebujesz?</h2>
           <div class="moneyNeeded">
-            <input v-model="moneyAmount" class="money">
+            <VueSlideBar
+              v-model="value2"
+              :min="500"
+              :max="150000"
+              :processStyle="slider.processStyle"
+              :range="slider.range"
+            ></VueSlideBar>
+            <h2>{{value2}} zl</h2>
           </div>
           <h3>W jakim czasie chcesz splacić?</h3>
           <div class="timeNeeded">
-            <input v-model="timeAmount" class="time">
+            <VueSlideBar
+              v-model="value3"
+              :min="3"
+              :max="120"
+              :processStyle="slider.processStyle"
+              :range="slider2.range"
+            ></VueSlideBar>
+            <h2>{{value3}} mies.</h2>
           </div>
           <div id="insurance-checkbox">
             <div class="box">
@@ -65,15 +69,36 @@ import VueSlideBar from "vue-slide-bar";
 export default {
   data() {
     return {
-      moneyAmount: "100000",
+      moneyAount: "100 000",
       timeAmount: "100",
       checked: false,
-      value2: 1,
+      value2: "",
+      value3: "",
       slider: {
-        lineHeight: 10,
-        processStyle: {
-          backgroundColor: "red"
-        }
+        range: [
+          {
+            label: "500"
+          },
+          {
+            label: "75 000"
+          },
+          {
+            label: "150 000 zl"
+          }
+        ]
+      },
+      slider2: {
+        range: [
+          {
+            label: "3"
+          },
+          {
+            label: "60"
+          },
+          {
+            label: "120 mies."
+          }
+        ]
       }
     };
   },
@@ -83,43 +108,43 @@ export default {
   },
   computed: {
     interestValue: function() {
-      if (this.moneyAmount <= 5000) {
+      if (this.value2 <= 5000) {
         return (this.interestValue = 9.99);
-      } else if (this.moneyAmount > 5000 && this.moneyAmount <= 15000) {
+      } else if (this.value2 > 5000 && this.value2 <= 15000) {
         return (this.interestValue = 9.49);
-      } else if (this.moneyAmount > 15000 && this.moneyAmount <= 50000) {
+      } else if (this.value2 > 15000 && this.value2 <= 50000) {
         return (this.interestValue = 8.99);
-      } else if (this.moneyAmount > 50000) {
+      } else if (this.value2 > 50000) {
         return (this.interestValue = 7.99);
       }
     },
     commissionValue: function() {
       if (
-        this.moneyAmount >= 500 &&
-        this.moneyAmount <= 5000 &&
+        this.value2 >= 500 &&
+        this.value2 <= 5000 &&
         this.timeAmount >= 3 &&
         this.timeAmount <= 96
       ) {
         return (this.commissionValue = 6.99);
       } else if (
-        this.moneyAmount > 5000 &&
-        this.moneyAmount <= 15000 &&
+        this.value2 > 5000 &&
+        this.value2 <= 15000 &&
         this.timeAmount >= 3 &&
         this.timeAmount <= 96
       ) {
         return (this.commissionValue = 6.49);
       } else if (
-        this.moneyAmount > 15000 &&
-        this.moneyAmount <= 30000 &&
+        this.value2 > 15000 &&
+        this.value2 <= 30000 &&
         this.timeAmount >= 3 &&
         this.timeAmount <= 96
       ) {
         return (this.commissionValue = 5.49);
-      } else if (this.moneyAmount > 30000 && this.moneyAmount <= 50000) {
+      } else if (this.value2 > 30000 && this.value2 <= 50000) {
         return (this.commissionValue = 4.99);
-      } else if (this.moneyAmount > 50000 && this.moneyAmount <= 100000) {
+      } else if (this.value2 > 50000 && this.value2 <= 100000) {
         return (this.commissionValue = 4.49);
-      } else if (this.moneyAmount > 100000) {
+      } else if (this.value2 > 100000) {
         return (this.commissionValue = 3.99);
       }
     }
