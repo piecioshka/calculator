@@ -8,24 +8,24 @@
           <h2>Ile pieniędzy potrzebujesz?</h2>
           <div class="moneyNeeded">
             <VueSlideBar
-              v-model="value2"
+              v-model="money"
               :min="500"
               :max="150000"
               :processStyle="slider.processStyle"
               :range="slider.range"
             ></VueSlideBar>
-            <h2>{{value2}} zl</h2>
+            <h2>{{money}} zl</h2>
           </div>
           <h3>W jakim czasie chcesz splacić?</h3>
           <div class="timeNeeded">
             <VueSlideBar
-              v-model="value3"
+              v-model="time"
               :min="3"
               :max="120"
               :processStyle="slider.processStyle"
               :range="slider2.range"
             ></VueSlideBar>
-            <h2>{{value3}} mies.</h2>
+            <h2>{{time}} mies.</h2>
           </div>
           <div id="insurance-checkbox">
             <div class="box">
@@ -69,11 +69,9 @@ import VueSlideBar from "vue-slide-bar";
 export default {
   data() {
     return {
-      moneyAount: "100 000",
-      timeAmount: "100",
       checked: false,
-      value2: "",
-      value3: "",
+      money: "",
+      time: "",
       slider: {
         range: [
           {
@@ -108,44 +106,48 @@ export default {
   },
   computed: {
     interestValue: function() {
-      if (this.value2 <= 5000) {
+      if (this.money <= 5000) {
         return (this.interestValue = 9.99);
-      } else if (this.value2 > 5000 && this.value2 <= 15000) {
+      } else if (this.money > 5000 && this.money <= 15000) {
         return (this.interestValue = 9.49);
-      } else if (this.value2 > 15000 && this.value2 <= 50000) {
+      } else if (this.money > 15000 && this.money <= 50000) {
         return (this.interestValue = 8.99);
-      } else if (this.value2 > 50000) {
+      } else if (this.money > 50000) {
         return (this.interestValue = 7.99);
       }
     },
     commissionValue: function() {
       if (
-        this.value2 >= 500 &&
-        this.value2 <= 5000 &&
-        this.value3 >= 3 &&
-        this.value3 <= 96
+        this.money >= 500 &&
+        this.money <= 5000 &&
+        this.time >= 3 &&
+        this.time <= 96
       ) {
         return (this.commissionValue = 6.99);
       } else if (
-        this.value2 > 5000 &&
-        this.value2 <= 15000 &&
-        this.value3 >= 3 &&
-        this.value3 <= 96
+        this.money > 5000 &&
+        this.money <= 15000 &&
+        this.time >= 3 &&
+        this.time <= 96
       ) {
         return (this.commissionValue = 6.49);
       } else if (
-        this.value2 > 15000 &&
-        this.value2 <= 30000 &&
-        this.value3 >= 3 &&
-        this.value3 <= 96
+        this.money > 15000 &&
+        this.money <= 30000 &&
+        this.time >= 3 &&
+        this.time <= 96
       ) {
         return (this.commissionValue = 5.49);
-      } else if (this.value2 > 30000 && this.value2 <= 50000) {
+      } else if (this.money > 30000 && this.money <= 50000) {
         return (this.commissionValue = 4.99);
-      } else if (this.value2 > 50000 && this.value2 <= 100000) {
+      } else if (this.money > 50000 && this.money <= 100000) {
         return (this.commissionValue = 4.49);
-      } else if (this.value2 > 100000) {
+      } else if (this.money > 100000) {
         return (this.commissionValue = 3.99);
+      } else if (this.money > 30000 && this.time >= 97) {
+        return (this.commissionValue = 5.49);
+      } else if (this.time >= 97) {
+        return (this.commissionValue = 5.49);
       }
     }
   }
