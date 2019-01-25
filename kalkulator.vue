@@ -11,10 +11,14 @@
               v-model="money"
               :min="500"
               :max="150000"
-              :processStyle="slider.processStyle"
+              :data="slider.data"
               :range="slider.range"
-            ></VueSlideBar>
-            <h2>{{money}} zl</h2>
+              >
+              <template slot="tooltip" slot-scope="tooltip">
+                <img src="/static/images/rectangle-slider.svg">
+              </template>
+              </VueSlideBar>
+            <h2>{{money}}</h2>
           </div>
           <h3>W jakim czasie chcesz splacić?</h3>
           <div class="timeNeeded">
@@ -22,9 +26,12 @@
               v-model="time"
               :min="3"
               :max="120"
-              :processStyle="slider.processStyle"
               :range="slider2.range"
-            ></VueSlideBar>
+            >
+            <template slot="tooltip" slot-scope="tooltip">
+              <img src="/static/images/rectangle-slider.svg">
+              </template>
+              </VueSlideBar>
             <h2>{{time}} mies.</h2>
           </div>
           <div id="insurance-checkbox">
@@ -96,11 +103,12 @@ export default {
           {
             label: "120 mies."
           }
-        ]
+        ],
       }
     };
   },
-  methods: {},
+  methods: {
+  },
   components: {
     VueSlideBar
   },
@@ -144,12 +152,12 @@ export default {
         return (this.commissionValue = 4.49);
       } else if (this.money > 100000) {
         return (this.commissionValue = 3.99);
-      } else if (this.money > 30000 && this.time >= 97) {
+      } else if (this.money <= 30000 && this.time <= 96) {
         return (this.commissionValue = 5.49);
-      } else if (this.time >= 97) {
+      } else if (this.time > 96) {
         return (this.commissionValue = 5.49);
       }
-    }
+    },
   }
 };
 </script>
