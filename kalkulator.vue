@@ -7,31 +7,20 @@
           <h1>Pierwszy kredyt gotówkowy</h1>
           <h2>Ile pieniędzy potrzebujesz?</h2>
           <div class="moneyNeeded">
-            <VueSlideBar
-              v-model="money"
-              :min="500"
-              :max="150000"
-              :data="slider.data"
-              :range="slider.range"
-              >
+            <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
                 <img src="/static/images/rectangle-slider.svg">
               </template>
-              </VueSlideBar>
-            <h2>{{money}}</h2>
+            </VueSlideBar>
+            <h2>{{money}} zl</h2>
           </div>
           <h3>W jakim czasie chcesz splacić?</h3>
           <div class="timeNeeded">
-            <VueSlideBar
-              v-model="time"
-              :min="3"
-              :max="120"
-              :range="slider2.range"
-            >
-            <template slot="tooltip" slot-scope="tooltip">
-              <img src="/static/images/rectangle-slider.svg">
+            <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
+              <template slot="tooltip" slot-scope="tooltip">
+                <img src="/static/images/rectangle-slider.svg">
               </template>
-              </VueSlideBar>
+            </VueSlideBar>
             <h2>{{time}} mies.</h2>
           </div>
           <div id="insurance-checkbox">
@@ -44,25 +33,28 @@
         </div>
         <div class="col-sm-4">
           <h3>
-            Miesięczna rata
-            <span class="monthlyValue">{{monthlyLoanValue}}</span>
+            Miesięczna rata:
+            <span class="monthlyValue">{{(((money*interestValue)/50)/time)}}</span>
           </h3>
           <div class="totalCost">
-            <div>
+            <div class="intValue">
               Oprocentowanie nominalne w skali roku:
-              <span class="intValue">{{interestValue}}%</span>
+              <span>{{interestValue}}%</span>
             </div>
-            <div>
+            <div class="commValue">
               Prowizja:
-              <span class="commValue">{{commissionValue}}%</span>
+              <span>{{commissionValue}}%</span>
             </div>
-            <div>
+            <div class="loanValue">
               Calkowity koszt kredytu:
-              <span class="loanValue">{{totalLoanValue}}%</span>
+              <span>{{(money*interestValue*1.5)/100}} zł</span>
             </div>
             <div v-if="checked" class="insValue">
               Miesięczna skadka ubezpieczeniowa:
               <span>{{insuranceValue}}%</span>
+            </div>
+            <div class="rrsoValue">
+              <span>RRSO:{{(time/money)*1000}} %</span>
             </div>
           </div>
         </div>
@@ -79,7 +71,9 @@ export default {
       checked: false,
       money: "",
       time: "",
-      slider: {
+      monthlyLoanValue: "",
+      totalLoanValue: "",
+      sliderMoney: {
         range: [
           {
             label: "500"
@@ -92,7 +86,7 @@ export default {
           }
         ]
       },
-      slider2: {
+      sliderTime: {
         range: [
           {
             label: "3"
@@ -103,12 +97,11 @@ export default {
           {
             label: "120 mies."
           }
-        ],
+        ]
       }
     };
   },
-  methods: {
-  },
+  methods: {},
   components: {
     VueSlideBar
   },
@@ -157,7 +150,7 @@ export default {
       } else if (this.time > 96) {
         return (this.commissionValue = 5.49);
       }
-    },
+    }
   }
 };
 </script>
