@@ -12,7 +12,7 @@
                 <img src="/static/images/rectangle-slider.svg">
               </template>
             </VueSlideBar>
-            <h2>{{money}} zl</h2>
+            <h2>{{Math.round(money*100)/100}} zl</h2>
           </div>
           <h3>W jakim czasie chcesz splacić?</h3>
           <div class="timeNeeded">
@@ -34,7 +34,7 @@
         <div class="col-sm-4">
           <h3>
             Miesięczna rata:
-            <span class="monthlyValue">{{(((money*interestValue)/50)/time)}}</span>
+            <span class="monthlyValue">{{Math.round(money/time)}} zl</span>
           </h3>
           <div class="totalCost">
             <div class="intValue">
@@ -47,14 +47,14 @@
             </div>
             <div class="loanValue">
               Calkowity koszt kredytu:
-              <span>{{(money*interestValue*1.5)/100}} zł</span>
+              <span>{{Math.round(money * (interestValue/100))}} zł</span>
             </div>
             <div v-if="checked" class="insValue">
               Miesięczna skadka ubezpieczeniowa:
               <span>{{insuranceValue}}%</span>
             </div>
             <div class="rrsoValue">
-              <span>RRSO:{{(time/money)*1000}} %</span>
+              <span>RRSO: {{(Math.round(money/time)/100)}}%</span>
             </div>
           </div>
         </div>
