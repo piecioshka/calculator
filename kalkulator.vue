@@ -4,24 +4,25 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8">
-          <h1>Pierwszy kredyt gotówkowy</h1>
-          <h2>Ile pieniędzy potrzebujesz?</h2>
+          <h5>Pierwszy kredyt gotówkowy</h5>
+          <h5>Ile pieniędzy potrzebujesz?</h5>
+          <button @click="more"> +100 </button>
           <div class="moneyNeeded">
             <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
                 <img src="/static/images/rectangle-slider.svg">
               </template>
             </VueSlideBar>
-            <h2>{{Math.round(money*100)/100}} zl</h2>
+            <h5>{{Math.round(money / 100) * 100}} zl</h5>
           </div>
-          <h3>W jakim czasie chcesz splacić?</h3>
+          <h5>W jakim czasie chcesz splacić?</h5>
           <div class="timeNeeded">
             <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
               <template slot="tooltip" slot-scope="tooltip">
                 <img src="/static/images/rectangle-slider.svg">
               </template>
             </VueSlideBar>
-            <h2>{{time}} mies.</h2>
+            <h5>{{time}} mies.</h5>
           </div>
           <div id="insurance-checkbox">
             <div class="box">
@@ -32,10 +33,10 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <h3>
+          <h4>
             Miesięczna rata:
-            <span class="monthlyValue">{{Math.round(money/time)}} zl</span>
-          </h3>
+            <span class="monthlyValue">{{Math.round(money / time)}} zl</span>
+          </h4>
           <div class="totalCost">
             <div class="intValue">
               Oprocentowanie nominalne w skali roku:
@@ -47,14 +48,14 @@
             </div>
             <div class="loanValue">
               Calkowity koszt kredytu:
-              <span>{{Math.round(money * (interestValue/100))}} zł</span>
+              <span>{{Math.round(money * (interestValue / 100))}} zł</span>
             </div>
             <div v-if="checked" class="insValue">
               Miesięczna skadka ubezpieczeniowa:
               <span>{{insuranceValue}}%</span>
             </div>
             <div class="rrsoValue">
-              <span>RRSO: {{(Math.round(money/time)/100)}}%</span>
+              <h5>RRSO: {{(Math.round(money / time) / 100)}}%</h5>
             </div>
           </div>
         </div>
@@ -64,11 +65,12 @@
 </template>
 
 <script>
-import VueSlideBar from "vue-slide-bar";
+import VueSlideBar from "vue-slide-bar"
 export default {
   data() {
     return {
       checked: false,
+      more: true,
       money: "",
       time: "",
       monthlyLoanValue: "",
@@ -101,7 +103,11 @@ export default {
       }
     };
   },
-  methods: {},
+  methods: {
+        more: function() {
+          money() + 100
+    },
+  },
   components: {
     VueSlideBar
   },
@@ -155,4 +161,5 @@ export default {
 };
 </script>
 <style>
+
 </style>
