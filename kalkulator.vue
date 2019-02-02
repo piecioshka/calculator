@@ -1,50 +1,61 @@
 <template>
   <div id="mbank-app">
     <div class="jumbotron text-center"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8">
+    <div class="container" style="font-family: Montserrat">
+      <div class="row" style="outline: 1px solid limegreen;
+  outline-offset: 15px;">
+        <div class="col-sm-7">
           <h5>Pierwszy kredyt gotówkowy</h5>
           <h5>Ile pieniędzy potrzebujesz?</h5>
-          <button type="button" name="button" class="btn" @click="time++">+</button>
           <div class="moneyNeeded">
             <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/arrow.png" width="25px" height="25px">
+                <img src="/static/images/arrow.png" width="20px" height="20px">
               </template>
             </VueSlideBar>
-            <h5>{{Math.round(money / 100) * 100}} zl</h5>
+            <h5
+              style="font-weight: bold; text-align: center; color: limegreen"
+            >{{Math.round(money / 100) * 100}} zl</h5>
           </div>
           <h5>W jakim czasie chcesz splacić?</h5>
           <div class="timeNeeded">
             <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/arrow.png" width="25px" height="25px">
+                <img src="/static/images/arrow.png" width="20px" height="20px">
               </template>
             </VueSlideBar>
-            <h5>{{time}} mies.</h5>
+            <h5 style="font-weight: bold; text-align: center; color: limegreen">{{time}} mies.</h5>
           </div>
           <div id="insurance-checkbox">
             <div class="box">
               <label>
-                <input v-model="checked" type="checkbox">Z ubezpieczeniem
+                <input v-model="checked" type="checkbox"> Z ubezpieczeniem
               </label>
             </div>
           </div>
         </div>
-        <div class="col-sm-4">
-          <h4>
+        <div
+          class="col-sm-5"
+          style="border-left: solid;
+    border-width: 1px;
+    padding-left: 20px;
+    left: 20px"
+        >
+          <h4 style="font-weight: bold; font-size: 16px; text-align: center">
             Miesięczna rata:
-            <span class="monthlyValue">{{Math.round(money / time)}} zl</span>
+            <span
+              class="monthlyValue"
+              style="color: limegreen; font-size: 26px"
+            >{{Math.round(money / time)}} zl</span>
           </h4>
           <div class="totalCost">
-            <div class="intValue">
+            <div class="intValue" style="font-size: 14px">
               Oprocentowanie nominalne w skali roku:
-              <span>{{interestValue}}%</span>
+              <span style="font-size: 18px">{{interestValue}}%</span>
             </div>
-            <div class="commValue">
+            <div class="commValue" style="font-size: 14px">
               Prowizja:
-              <span>{{commissionValue}}%</span>
+              <span style="font-size: 18px">{{commissionValue}}%</span>
             </div>
             <div class="loanValue">
               Calkowity koszt kredytu:
@@ -55,8 +66,15 @@
               <span>{{insuranceValue}}%</span>
             </div>
           </div>
-          <div class="rrsoValue">
-            <h5>RRSO: {{(Math.round(money / time) / 100)}}%</h5>
+          <br>
+          <div class="rrsoValue" style="text-align: center">
+            <h5 style="font-weight: bold">
+              RRSO:
+              <span
+                style="font-size: 26px; color: limegreen"
+              >{{(Math.round(money / time) / 100)}}%</span>
+            </h5>
+            <button type="button" name="button" class="btn" @click="time++">+</button>
           </div>
         </div>
       </div>
@@ -161,4 +179,5 @@ export default {
 };
 </script>
 <style>
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
 </style>
