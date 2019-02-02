@@ -6,11 +6,11 @@
         <div class="col-sm-8">
           <h5>Pierwszy kredyt gotówkowy</h5>
           <h5>Ile pieniędzy potrzebujesz?</h5>
-          <button @click="more"> +100 </button>
+          <button type="button" name="button" class="btn" @click="time++">+</button>
           <div class="moneyNeeded">
             <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/rectangle-slider.svg">
+                <img src="/static/images/arrow.png" width="25px" height="25px">
               </template>
             </VueSlideBar>
             <h5>{{Math.round(money / 100) * 100}} zl</h5>
@@ -19,7 +19,7 @@
           <div class="timeNeeded">
             <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/rectangle-slider.svg">
+                <img src="/static/images/arrow.png" width="25px" height="25px">
               </template>
             </VueSlideBar>
             <h5>{{time}} mies.</h5>
@@ -54,9 +54,9 @@
               Miesięczna skadka ubezpieczeniowa:
               <span>{{insuranceValue}}%</span>
             </div>
-            <div class="rrsoValue">
-              <h5>RRSO: {{(Math.round(money / time) / 100)}}%</h5>
-            </div>
+          </div>
+          <div class="rrsoValue">
+            <h5>RRSO: {{(Math.round(money / time) / 100)}}%</h5>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import VueSlideBar from "vue-slide-bar"
+import VueSlideBar from "vue-slide-bar";
 export default {
   data() {
     return {
@@ -104,9 +104,9 @@ export default {
     };
   },
   methods: {
-        more: function() {
-          money() + 100
-    },
+    more: function() {
+      money() + 100;
+    }
   },
   components: {
     VueSlideBar
@@ -161,5 +161,4 @@ export default {
 };
 </script>
 <style>
-
 </style>
