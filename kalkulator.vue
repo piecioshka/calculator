@@ -1,8 +1,8 @@
 <template>
   <div id="mbank-app">
-    <div class="jumbotron text-center"></div>
+    <div style="height:200px; width: auto"></div>
     <div class="container" style="font-family: Montserrat; color: #515153">
-      <div class="row" style="outline: 1px solid limegreen;
+      <div class="row" style="outline: 1px solid #ccc;
   outline-offset: 15px;">
         <div class="col-sm-7">
           <h1 style="font-size: 17px; font-weight: bold">Pierwszy kredyt gotówkowy</h1>
@@ -43,7 +43,7 @@
           <div style="text-align: right">
             <span
               class="loanTooltip"
-              style="font-size: 14px; padding-right: 15px"
+              style="font-size: 14px; padding-right: 15px; cursor: help"
             >Zobacz koszt kredytu</span>
           </div>
           <br>
@@ -77,7 +77,12 @@
                 style="font-size: 16px"
               >{{Math.round(money * (interestValue / 100))}} zł</span>
             </div>
-            <div v-if="checked" class="insValue">
+            <div
+              v-if="checked"
+              class="insValue"
+              style="border-top: 1px solid #ccc;
+    border-width: 1px;"
+            >
               Miesięczna skadka ubezpieczeniowa:
               <span>{{insuranceValue}}%</span>
             </div>
