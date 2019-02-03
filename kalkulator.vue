@@ -1,12 +1,12 @@
 <template>
   <div id="mbank-app">
     <div class="jumbotron text-center"></div>
-    <div class="container" style="font-family: Montserrat">
+    <div class="container" style="font-family: Montserrat; color: #515153">
       <div class="row" style="outline: 1px solid limegreen;
   outline-offset: 15px;">
         <div class="col-sm-7">
-          <h5>Pierwszy kredyt gotówkowy</h5>
-          <h5>Ile pieniędzy potrzebujesz?</h5>
+          <h1 style="font-size: 17px; font-weight: bold">Pierwszy kredyt gotówkowy</h1>
+          <h1 style="font-size: 16px">Ile pieniędzy potrzebujesz?</h1>
           <div class="moneyNeeded">
             <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
@@ -17,7 +17,7 @@
               style="font-weight: bold; text-align: center; color: limegreen"
             >{{Math.round(money / 100) * 100}} zl</h5>
           </div>
-          <h5>W jakim czasie chcesz splacić?</h5>
+          <h1 style="font-size: 16px">W jakim czasie chcesz splacić?</h1>
           <div class="timeNeeded">
             <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
               <template slot="tooltip" slot-scope="tooltip">
@@ -28,7 +28,7 @@
           </div>
           <div id="insurance-checkbox">
             <div class="box">
-              <label>
+              <label style="font-size: 15px">
                 <input v-model="checked" type="checkbox"> Z ubezpieczeniem
               </label>
             </div>
@@ -36,11 +36,17 @@
         </div>
         <div
           class="col-sm-5"
-          style="border-left: solid;
+          style="border-left: 1px solid #ccc;
     border-width: 1px;
-    padding-left: 20px;
-    left: 20px"
+    left: 30px"
         >
+          <div style="text-align: right">
+            <span
+              class="loanTooltip"
+              style="font-size: 14px; padding-right: 15px"
+            >Zobacz koszt kredytu</span>
+          </div>
+          <br>
           <h4 style="font-weight: bold; font-size: 16px; text-align: center">
             Miesięczna rata:
             <span
@@ -48,18 +54,28 @@
               style="color: limegreen; font-size: 26px"
             >{{Math.round(money / time)}} zl</span>
           </h4>
-          <div class="totalCost">
+          <div class="totalCost" style="padding-right: 15px">
             <div class="intValue" style="font-size: 14px">
               Oprocentowanie nominalne w skali roku:
-              <span style="font-size: 18px">{{interestValue}}%</span>
+              <span style="font-size: 16px">{{interestValue}}%</span>
             </div>
-            <div class="commValue" style="font-size: 14px">
+            <div
+              class="commValue"
+              style="font-size: 14px; border-top: 1px solid #ccc;
+    border-width: 1px;"
+            >
               Prowizja:
-              <span style="font-size: 18px">{{commissionValue}}%</span>
+              <span style="font-size: 16px">{{commissionValue}}%</span>
             </div>
-            <div class="loanValue">
+            <div
+              class="loanValue"
+              style="font-size: 14px; border-top: 1px solid #ccc;
+    border-width: 1px;"
+            >
               Calkowity koszt kredytu:
-              <span>{{Math.round(money * (interestValue / 100))}} zł</span>
+              <span
+                style="font-size: 16px"
+              >{{Math.round(money * (interestValue / 100))}} zł</span>
             </div>
             <div v-if="checked" class="insValue">
               Miesięczna skadka ubezpieczeniowa:
@@ -75,6 +91,14 @@
               >{{(Math.round(money / time) / 100)}}%</span>
             </h5>
             <button type="button" name="button" class="btn" @click="time++">+</button>
+            <br>
+            <br>
+            <button
+              type="button"
+              name="button"
+              class="btn"
+              style="background-color: #d1202e; color: white; border-radius: 20px"
+            >ZŁÓŻ WNIOSEK</button>
           </div>
         </div>
       </div>
