@@ -6,25 +6,27 @@
   outline-offset: 15px;">
         <div class="col-sm-7">
           <h1 style="font-size: 17px; font-weight: bold">Pierwszy kredyt gotówkowy</h1>
-          <h1 style="font-size: 16px">Ile pieniędzy potrzebujesz?</h1>
+          <div style="font-size: 16px">Ile pieniędzy potrzebujesz?
+            <span
+              style="font-size: 22px; font-weight: bold; text-align: center; color: limegreen; float: right"
+            >{{Math.round(money / 100) * 100}} zl</span>
+          </div>
           <div class="moneyNeeded">
             <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/arrow.png" width="20px" height="20px">
+                <img src="/static/images/rectangle-slider.svg" width="20px" height="20px">
               </template>
             </VueSlideBar>
-            <h5
-              style="font-weight: bold; text-align: center; color: limegreen"
-            >{{Math.round(money / 100) * 100}} zl</h5>
           </div>
-          <h1 style="font-size: 16px">W jakim czasie chcesz splacić?</h1>
+          <h1 style="font-size: 16px">W jakim czasie chcesz spłacić?
+            <h5 style="font-size: 22px; font-weight: bold; text-align: center; color: limegreen; float: right">{{time}} mies.</h5>
+          </h1>
           <div class="timeNeeded">
             <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/arrow.png" width="20px" height="20px">
+                <img src="/static/images/rectangle-slider.svg" width="20px" height="20px">
               </template>
             </VueSlideBar>
-            <h5 style="font-weight: bold; text-align: center; color: limegreen">{{time}} mies.</h5>
           </div>
           <div id="insurance-checkbox">
             <div class="box">
@@ -83,7 +85,7 @@
               style="border-top: 1px solid #ccc;
     border-width: 1px;"
             >
-              Miesięczna skadka ubezpieczeniowa:
+              Miesięczna składka ubezpieczeniowa:
               <span>{{insuranceValue}}%</span>
             </div>
           </div>
@@ -95,8 +97,6 @@
                 style="font-size: 26px; color: limegreen"
               >{{(Math.round(money / time) / 100)}}%</span>
             </h5>
-            <button type="button" name="button" class="btn" @click="time++">+</button>
-            <br>
             <br>
             <button
               type="button"
@@ -117,7 +117,6 @@ export default {
   data() {
     return {
       checked: false,
-      more: true,
       money: "",
       time: "",
       monthlyLoanValue: "",
@@ -151,9 +150,6 @@ export default {
     };
   },
   methods: {
-    more: function() {
-      money() + 100;
-    }
   },
   components: {
     VueSlideBar
