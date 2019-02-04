@@ -14,7 +14,7 @@
           <div class="moneyNeeded">
             <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/rectangle-slider.svg" width="20px" height="20px">
+                <img src="https://s3-eu-west-1.amazonaws.com/landingi-editor-uploads/cmacn0ZG/arrow.png" width="20px" height="20px">
               </template>
             </VueSlideBar>
           </div>
@@ -24,7 +24,7 @@
           <div class="timeNeeded">
             <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="/static/images/rectangle-slider.svg" width="20px" height="20px">
+                <img src="https://s3-eu-west-1.amazonaws.com/landingi-editor-uploads/cmacn0ZG/arrow.png" width="20px" height="20px">
               </template>
             </VueSlideBar>
           </div>
