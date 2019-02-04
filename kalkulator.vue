@@ -1,109 +1,79 @@
 <template>
   <div id="mbank-app">
     <div style="height:200px; width: auto"></div>
-    <div class="container" style="font-family: Montserrat; color: #515153">
-      <div class="row" style="outline: 1px solid #ccc;
-  outline-offset: 15px;">
+    <div class="container">
+      <div class="row">
         <div class="col-sm-7">
-          <h1 style="font-size: 17px; font-weight: bold">Pierwszy kredyt gotówkowy</h1>
-          <div style="font-size: 16px">Ile pieniędzy potrzebujesz?
-            <span
-              style="font-size: 22px; font-weight: bold; text-align: center; color: limegreen; float: right"
-            >{{Math.round(money / 100) * 100}} zl</span>
-          </div>
+          <h1>Pierwszy kredyt gotówkowy</h1>
           <div class="moneyNeeded">
+            Ile pieniędzy potrzebujesz?
+            <span>{{Math.round(money / 100) * 100}} zl</span>
+          </div>
+          <div class="moneyValue">
             <VueSlideBar v-model="money" :min="500" :max="150000" :range="sliderMoney.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="https://s3-eu-west-1.amazonaws.com/landingi-editor-uploads/cmacn0ZG/arrow.png" width="20px" height="20px">
+                <img
+                  class="handle"
+                  src="https://s3-eu-west-1.amazonaws.com/landingi-editor-uploads/cmacn0ZG/arrow.png"
+                >
               </template>
             </VueSlideBar>
           </div>
-          <h1 style="font-size: 16px">W jakim czasie chcesz spłacić?
-            <h5 style="font-size: 22px; font-weight: bold; text-align: center; color: limegreen; float: right">{{time}} mies.</h5>
-          </h1>
           <div class="timeNeeded">
+            W jakim czasie chcesz spłacić?
+            <span>{{time}} mies.</span>
+          </div>
+          <div class="timeValue">
             <VueSlideBar v-model="time" :min="3" :max="120" :range="sliderTime.range">
               <template slot="tooltip" slot-scope="tooltip">
-                <img src="https://s3-eu-west-1.amazonaws.com/landingi-editor-uploads/cmacn0ZG/arrow.png" width="20px" height="20px">
+                <img
+                  class="handle"
+                  src="https://s3-eu-west-1.amazonaws.com/landingi-editor-uploads/cmacn0ZG/arrow.png"
+                >
               </template>
             </VueSlideBar>
           </div>
           <div id="insurance-checkbox">
             <div class="box">
-              <label style="font-size: 15px">
+              <label>
                 <input v-model="checked" type="checkbox"> Z ubezpieczeniem
               </label>
             </div>
           </div>
         </div>
-        <div
-          class="col-sm-5"
-          style="border-left: 1px solid #ccc;
-    border-width: 1px;
-    left: 30px"
-        >
-          <div style="text-align: right">
-            <span
-              class="loanTooltip"
-              style="font-size: 14px; padding-right: 15px; cursor: help"
-            >Zobacz koszt kredytu</span>
+        <div class="col-sm-5">
+          <div>
+            <span class="loanTooltip">Zobacz koszt kredytu</span>
           </div>
           <br>
-          <h4 style="font-weight: bold; font-size: 16px; text-align: center">
+          <h4 class="monthlyRate">
             Miesięczna rata:
-            <span
-              class="monthlyValue"
-              style="color: limegreen; font-size: 26px"
-            >{{Math.round(money / time)}} zl</span>
+            <span class="monthlyValue">{{Math.round(money / time)}} zl</span>
           </h4>
-          <div class="totalCost" style="padding-right: 15px">
-            <div class="intValue" style="font-size: 14px">
+          <div class="totalCost">
+            <div class="intValue">
               Oprocentowanie nominalne w skali roku:
-              <span style="font-size: 16px">{{interestValue}}%</span>
+              <span>{{interestValue}}%</span>
             </div>
-            <div
-              class="commValue"
-              style="font-size: 14px; border-top: 1px solid #ccc;
-    border-width: 1px;"
-            >
+            <div class="commValue">
               Prowizja:
-              <span style="font-size: 16px">{{commissionValue}}%</span>
+              <span>{{commissionValue}}%</span>
             </div>
-            <div
-              class="loanValue"
-              style="font-size: 14px; border-top: 1px solid #ccc;
-    border-width: 1px;"
-            >
+            <div class="loanValue">
               Calkowity koszt kredytu:
-              <span
-                style="font-size: 16px"
-              >{{Math.round(money * (interestValue / 100))}} zł</span>
+              <span>{{Math.round(money * (interestValue / 100))}} zł</span>
             </div>
-            <div
-              v-if="checked"
-              class="insValue"
-              style="border-top: 1px solid #ccc;
-    border-width: 1px;"
-            >
+            <div v-if="checked" class="insValue">
               Miesięczna składka ubezpieczeniowa:
               <span>{{insuranceValue}}%</span>
             </div>
           </div>
           <br>
-          <div class="rrsoValue" style="text-align: center">
-            <h5 style="font-weight: bold">
-              RRSO:
-              <span
-                style="font-size: 26px; color: limegreen"
-              >{{(Math.round(money / time) / 100)}}%</span>
-            </h5>
+          <div class="rrsoValue">
+            RRSO:
+            <span>{{(Math.round(money / time) / 100)}}%</span>
             <br>
-            <button
-              type="button"
-              name="button"
-              class="btn"
-              style="background-color: #d1202e; color: white; border-radius: 20px"
-            >ZŁÓŻ WNIOSEK</button>
+            <button type="button" name="button" class="btn">ZŁÓŻ WNIOSEK</button>
           </div>
         </div>
       </div>
@@ -149,8 +119,7 @@ export default {
       }
     };
   },
-  methods: {
-  },
+  methods: {},
   components: {
     VueSlideBar
   },
@@ -205,4 +174,89 @@ export default {
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+.container {
+  font-family: Montserrat;
+  color: #515153;
+}
+.row {
+  outline: 1px solid #ccc;
+  outline-offset: 15px;
+}
+h1 {
+  font-size: 17px;
+  font-weight: bold;
+}
+.moneyNeeded {
+  font-size: 16px;
+}
+.moneyNeeded > span,
+.timeNeeded > span {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: limegreen;
+  float: right;
+}
+.handle {
+  width: 20px;
+  height: 20px;
+}
+.timeNeeded {
+  font-size: 16px;
+}
+.box > label {
+  font-size: 15px;
+}
+.col-sm-5 {
+  border-left: 1px solid #ccc;
+  border-width: 1px;
+  left: 30px;
+}
+.loanTooltip {
+  font-size: 14px;
+  padding-right: 15px;
+  cursor: help;
+  float: right;
+}
+.monthlyRate {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+.monthlyValue {
+  color: limegreen;
+  font-size: 26px;
+}
+.totalCost {
+  padding-right: 15px;
+}
+.intValue {
+  font-size: 14px;
+}
+.intValue > span,
+.commValue > span,
+.loanValue > span {
+  font-size: 16px;
+}
+.commValue,
+.loanValue,
+.insValue {
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+  border-width: 1px;
+}
+.rrsoValue {
+  text-align: center;
+  font-weight: bold;
+}
+.rrsoValue > span {
+  font-size: 26px;
+  color: limegreen;
+}
+.btn {
+  background-color: #d1202e;
+  color: white;
+  border-radius: 20px;
+}
 </style>
