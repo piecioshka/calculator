@@ -1,10 +1,10 @@
 <template>
   <div id="mbank-app">
-    <div style="height:200px; width: auto"></div>
+    <div style="height: 100px; width: auto"></div>
     <div class="container">
       <div class="row">
         <div class="col-sm-7">
-          <h1>Pierwszy kredyt gotówkowy</h1>
+          <h1 class="app-header">Pierwszy kredyt gotówkowy</h1>
           <div class="moneyNeeded">
             Ile pieniędzy potrzebujesz?
             <span>{{Math.round(money / 100) * 100}} zl</span>
@@ -174,89 +174,4 @@ export default {
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
-
-.container {
-  font-family: Montserrat;
-  color: #515153;
-}
-.row {
-  outline: 1px solid #ccc;
-  outline-offset: 15px;
-}
-h1 {
-  font-size: 17px;
-  font-weight: bold;
-}
-.moneyNeeded {
-  font-size: 16px;
-}
-.moneyNeeded > span,
-.timeNeeded > span {
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
-  color: limegreen;
-  float: right;
-}
-.handle {
-  width: 20px;
-  height: 20px;
-}
-.timeNeeded {
-  font-size: 16px;
-}
-.box > label {
-  font-size: 15px;
-}
-.col-sm-5 {
-  border-left: 1px solid #ccc;
-  border-width: 1px;
-  left: 30px;
-}
-.loanTooltip {
-  font-size: 14px;
-  padding-right: 15px;
-  cursor: help;
-  float: right;
-}
-.monthlyRate {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-}
-.monthlyValue {
-  color: limegreen;
-  font-size: 26px;
-}
-.totalCost {
-  padding-right: 15px;
-}
-.intValue {
-  font-size: 14px;
-}
-.intValue > span,
-.commValue > span,
-.loanValue > span {
-  font-size: 16px;
-}
-.commValue,
-.loanValue,
-.insValue {
-  font-size: 14px;
-  border-top: 1px solid #ccc;
-  border-width: 1px;
-}
-.rrsoValue {
-  text-align: center;
-  font-weight: bold;
-}
-.rrsoValue > span {
-  font-size: 26px;
-  color: limegreen;
-}
-.btn {
-  background-color: #d1202e;
-  color: white;
-  border-radius: 20px;
-}
 </style>
