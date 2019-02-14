@@ -4,9 +4,9 @@ const start = moment()
 const end = start.add(100, 'M')
 
 
-var okres = 81
-var kwotaNetto = 6700
-var oprocentowanie = 0.0799 //interestValue.innerHTML / 100
+let okres = 81
+let kwotaNetto = 6700
+let oprocentowanie = 0.0199 //interestValue.innerHTML / 100
 
 function getDaysInCurrentYear(year) {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
@@ -162,7 +162,7 @@ function myRRSO(i) {
 //suma_pochodna1 = suma(pochodna1 2 + … pochodna1 i )
 //stopa_wynikowa2 = stopa_wynikowa1 - suma_funkcja2/ suma_pochodna2
 
-var tabela = []
+let tabela = []
 
 for (var i = 0; i <= okres; i++) {
     tabela[i] = {
@@ -178,16 +178,16 @@ for (var i = 0; i <= okres; i++) {
         // deriv4: deriv4(i),
         // fun5: fun5(i),
         // deriv5: deriv5(i),
-    };
+    }
 }
 
-var fun1Sum = tabela.reduce(function(total, row) {
+let fun1Sum = tabela.reduce(function(total, row) {
     return total + row.fun1
-}, 0);
+}, 0)
 
-var deriv1Sum = tabela.reduce(function(total, row) {
+let deriv1Sum = tabela.reduce(function(total, row) {
     return total + row.deriv1
-}, 0);
+}, 0)
 
 let oprocentowanie2 = oprocentowanie - (fun1Sum / deriv1Sum);
 
@@ -197,13 +197,13 @@ tabela.forEach((row, i) => {
 })
 
 
-var fun2Sum = tabela.reduce(function(total, row) {
+let fun2Sum = tabela.reduce(function(total, row) {
     return total + row.fun2
-}, 0);
+}, 0)
 
-var deriv2Sum = tabela.reduce(function(total, row) {
+let deriv2Sum = tabela.reduce(function(total, row) {
     return total + row.deriv2
-}, 0);
+}, 0)
 
 let oprocentowanie3 = oprocentowanie2 - (fun2Sum / deriv2Sum)
 
@@ -213,13 +213,13 @@ tabela.forEach((row, i) => {
 })
 
 
-var fun3Sum = tabela.reduce(function(total, row) {
+let fun3Sum = tabela.reduce(function(total, row) {
     return total + row.fun3
-}, 0);
+}, 0)
 
-var deriv3Sum = tabela.reduce(function(total, row) {
+let deriv3Sum = tabela.reduce(function(total, row) {
     return total + row.deriv3
-}, 0);
+}, 0)
 
 let oprocentowanie4 = oprocentowanie3 - (fun3Sum / deriv3Sum)
 
@@ -228,13 +228,13 @@ tabela.forEach((row, i) => {
     tabela[i].deriv4 = deriv4(i, oprocentowanie4)
 })
 
-var fun4Sum = tabela.reduce(function(total, row) {
+let fun4Sum = tabela.reduce(function(total, row) {
     return total + row.fun4
-}, 0);
+}, 0)
 
-var deriv4Sum = tabela.reduce(function(total, row) {
+let deriv4Sum = tabela.reduce(function(total, row) {
     return total + row.deriv4
-}, 0);
+}, 0)
 
 let oprocentowanie5 = oprocentowanie4 - (fun4Sum / deriv4Sum)
 
@@ -243,12 +243,12 @@ tabela.forEach((row, i) => {
     tabela[i].deriv5 = deriv5(i, oprocentowanie5)
 })
 
-var fun5Sum = tabela.reduce(function(total, row) {
+let fun5Sum = tabela.reduce(function(total, row) {
     return total + row.fun5
-}, 0);
+}, 0)
 
-var deriv5Sum = tabela.reduce(function(total, row) {
+let deriv5Sum = tabela.reduce(function(total, row) {
     return total + row.deriv5
-}, 0);
+}, 0)
 
 console.log(myRRSO(i))
