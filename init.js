@@ -12,13 +12,12 @@ let percent = 0.0799 //interestValue.innerHTML / 100
 let rate = Math.round((netValue + netValue * prowizja) * percent / 12 / (1 - Math.pow((1 + percent / 12), (-period))))
 
 
-
-function init(period, netValue, percent, rata) {
+//function init(period, netValue, percent, rata) {
 
 function getDaysInCurrentYear(year) {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
-            return moment(year, 'YYYY').add(i, 'M').daysInMonth()
-        }).reduce((total, current) => total + current, 0)
+        return moment(year, 'YYYY').add(i, 'M').daysInMonth()
+    }).reduce((total, current) => total + current, 0)
 }
 
 function tki(i) {
@@ -252,10 +251,6 @@ let deriv5Sum = tabela.reduce(function(total, row) {
     return total + row.deriv5
 }, 0)
 
-}
-
-console.log(init(period, netValue, percent, rata))
-
-init(period, netValue, percent, rata)
 
 
+console.log(myRRSO(i))
