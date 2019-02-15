@@ -1,18 +1,14 @@
-const moment = require('moment')
-
 const start = moment()
 const end = start.add(100, 'M')
 
-
-
-let prowizja = 0.0399 //commissionValue.innerHTML / 100
+let prowizja = 0.03990
 let period = 100
 let netValue = 109900
-let percent = 0.0799 //interestValue.innerHTML / 100
+let percent = 0.079990
 let rate = Math.round((netValue + netValue * prowizja) * percent / 12 / (1 - Math.pow((1 + percent / 12), (-period))))
 
-
-//function init(period, netValue, percent, rata) {
+                           
+function init(period, netValue, percent, rate) {
 
 function getDaysInCurrentYear(year) {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
@@ -137,28 +133,28 @@ function deriv5(i, oprocentowanie5) {
     }
 }
 
-function resultantRate1(i) {
+function resultantRate1() {
     return percent - fun1Sum / deriv1Sum
 }
 
-function resultantRate2(i) {
-    return resultantRate1(i) - fun2Sum / deriv2Sum
+function resultantRate2() {
+    return resultantRate1() - fun2Sum / deriv2Sum
 }
 
-function resultantRate3(i) {
-    return resultantRate2(i) - fun3Sum / deriv3Sum
+function resultantRate3() {
+    return resultantRate2() - fun3Sum / deriv3Sum
 }
 
-function resultantRate4(i) {
-    return resultantRate3(i) - fun4Sum / deriv4Sum
+function resultantRate4() {
+    return resultantRate3() - fun4Sum / deriv4Sum
 }
 
-function resultantRate5(i) {
-    return resultantRate4(i) - fun5Sum / deriv5Sum
+function resultantRate5() {
+    return resultantRate4() - fun5Sum / deriv5Sum
 }
-
-function myRRSO(i) {
-    return (resultantRate5(i) * 100).toFixed(2) + "%"
+console.log(i)
+function myRRSO() {
+    return (resultantRate5().toString().substring(0, 10)) + '%'
 }
 
 
@@ -170,8 +166,8 @@ for (var i = 0; i <= period; i++) {
         aki: aki(i),
         fun1: fun1(i),
         deriv1: deriv1(i),
-        // fun2: fun2(i),
-        // deriv2: deriv2(i),
+        //fun2: fun2(i),
+        //deriv2: deriv2(i),
         // fun3: fun3(i),
         // deriv3: deriv3(i),
         // fun4: fun4(i),
@@ -250,7 +246,4 @@ let fun5Sum = tabela.reduce(function(total, row) {
 let deriv5Sum = tabela.reduce(function(total, row) {
     return total + row.deriv5
 }, 0)
-
-
-
-console.log(myRRSO(i))
+}
