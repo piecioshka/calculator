@@ -163,6 +163,7 @@ function myRRSO() {
 
 function init(period, netValue, percent, monthlyRate) {
 
+    console.time('tabela');
     const tabela = []
 
     for (var i = 0; i <= period; i++) {
@@ -181,7 +182,9 @@ function init(period, netValue, percent, monthlyRate) {
             // deriv5: deriv5(i),
         }
     }
+    console.timeEnd('tabela');
 
+    console.time('reduce');
     const fun1Sum = tabela.reduce(function (total, row) {
         return total + row.fun1
     }, 0)
@@ -222,8 +225,10 @@ function init(period, netValue, percent, monthlyRate) {
         return total + row.deriv4
     }, 0)
 
-    const oprocentowanie5 = oprocentowanie4 - (fun4Sum / deriv4Sum)
+    const oprocentowanie5 = oprocentowanie4 - (fun4Sum / deriv4Sum);
+    console.timeEnd('reduce');
 
+    console.time('forEach');
     tabela.forEach((row, i) => {
         tabela[i].fun2 = fun2(i, oprocentowanie2)
         tabela[i].deriv2 = deriv2(i, oprocentowanie2)
@@ -234,4 +239,5 @@ function init(period, netValue, percent, monthlyRate) {
         tabela[i].fun5 = fun5(i, oprocentowanie5)
         tabela[i].deriv5 = deriv5(i, oprocentowanie5)
     });
+    console.timeEnd('forEach');
 }
