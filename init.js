@@ -17,7 +17,7 @@ let monthlyRateWithInsurance = Math.round((netValue + netValue * commission + to
 
 
 
-//function init(period, netValue, percent, monthlyRate) {
+function init(period, netValue, percent, monthlyRate) {
 
 function getDaysInCurrentYear(year) {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
@@ -142,28 +142,35 @@ function deriv5(i, oprocentowanie5) {
     }
 }
 
-function resultantRate1(i) {
+function resultantRate1() {
     return percent - fun1Sum / deriv1Sum
 }
 
-function resultantRate2(i) {
-    return resultantRate1(i) - fun2Sum / deriv2Sum
+function resultantRate2() {
+    return resultantRate1() - fun2Sum / deriv2Sum
 }
 
-function resultantRate3(i) {
-    return resultantRate2(i) - fun3Sum / deriv3Sum
+function resultantRate3() {
+    return resultantRate2() - fun3Sum / deriv3Sum
 }
 
-function resultantRate4(i) {
-    return resultantRate3(i) - fun4Sum / deriv4Sum
+function resultantRate4() {
+    return resultantRate3() - fun4Sum / deriv4Sum
 }
 
-function resultantRate5(i) {
-    return resultantRate4(i) - fun5Sum / deriv5Sum
+function resultantRate5() {
+    return resultantRate4() - fun5Sum / deriv5Sum
 }
 
-function myRRSO(i) {
-    return (resultantRate5(i) * 100).toFixed(2) + "%"
+function _myRRSO() {
+    return (resultantRate5() * 100).toFixed(2) + "%"
+}
+    
+    function myRRSO(){
+const start = Date.now();
+const result = _myRRSO();
+console.log(`${Date.now() - start} ms`);
+return result;
 }
 
 
@@ -256,8 +263,8 @@ let deriv5Sum = tabela.reduce(function(total, row) {
     return total + row.deriv5
 }, 0)
 
-//}
+}
 
-//init(period, netValue, percent, monthlyRate)
+init(period, netValue, percent, monthlyRate)
 
 
