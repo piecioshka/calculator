@@ -1,5 +1,5 @@
-$('.moneySlider').on('input', _.debounce(update, 50));
-$('.timeSlider').on('input', _.debounce(update, 50));
+document.querySelector('.moneySlider').addEventListener('input', _.debounce(update, 50));
+document.querySelector('.timeSlider').addEventListener('input', _.debounce(update, 50));
 update();
 
 function update() {
