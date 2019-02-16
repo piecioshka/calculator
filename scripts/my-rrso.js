@@ -1,33 +1,28 @@
-const moment = require('moment')
 
 const start = moment()
 const end = start.add(100, 'M')
 
-
-
-let commission = 0.0399 //commissionValue.innerHTML / 100
-let period = 100
-let netValue = 109900
-let percent = 0.0799 //interestValue.innerHTML / 100
-let monthlyRate = Math.round((netValue + netValue * commission) * percent / 12 / (1 - Math.pow((1 + percent / 12), (-period))))
-let insuranceMultiplier = 0.00218
-let insurance  = (netValue + netValue * commission) * insuranceMultiplier
-let totalInsurance = insurance * period
-let monthlyRateWithInsurance = Math.round((netValue + netValue * commission + totalInsurance) * percent / 12 / (1 - Math.pow((1 + percent / 12), (-period))))
-
-
-
-function init(period, netValue, percent, monthlyRate) {
+const commission = 0.0399 //commissionValue.innerHTML / 100
+const period = 100
+const netValue = 109900
+const percent = 0.0799 //interestValue.innerHTML / 100
+const monthlyRate = Math.round((netValue + netValue * commission) * percent / 12 / (1 - Math.pow((1 + percent / 12), (-period))))
+const insuranceMultiplier = 0.00218
+const insurance = (netValue + netValue * commission) * insuranceMultiplier
+const totalInsurance = insurance * period
+const monthlyRateWithInsurance = Math.round((netValue + netValue * commission + totalInsurance) * percent / 12 / (1 - Math.pow((1 + percent / 12), (-period))))
 
 function getDaysInCurrentYear(year) {
-    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
+    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        .map((i) => {
             return moment(year, 'YYYY').add(i, 'M').daysInMonth()
-        }).reduce((total, current) => total + current, 0)
+        })
+        .reduce((total, current) => total + current, 0)
 }
 
 function tki(i) {
-    let today = start.add(i, 'M')
-    let currentYear = today.format('YYYY')
+    const today = start.add(i, 'M')
+    const currentYear = today.format('YYYY')
     return ((i * 30.41666) / getDaysInCurrentYear(currentYear))
 }
 
@@ -162,109 +157,81 @@ function resultantRate5() {
     return resultantRate4() - fun5Sum / deriv5Sum
 }
 
-function _myRRSO() {
+function myRRSO() {
     return (resultantRate5() * 100).toFixed(2) + "%"
 }
-    
-    function myRRSO(){
-const start = Date.now();
-const result = _myRRSO();
-console.log(`${Date.now() - start} ms`);
-return result;
-}
 
+function init(period, netValue, percent, monthlyRate) {
 
-let tabela = []
+    const tabela = []
 
-for (var i = 0; i <= period; i++) {
-    tabela[i] = {
-        tki: tki(i),
-        aki: aki(i),
-        fun1: fun1(i),
-        deriv1: deriv1(i),
-        // fun2: fun2(i),
-        // deriv2: deriv2(i),
-        // fun3: fun3(i),
-        // deriv3: deriv3(i),
-        // fun4: fun4(i),
-        // deriv4: deriv4(i),
-        // fun5: fun5(i),
-        // deriv5: deriv5(i),
+    for (var i = 0; i <= period; i++) {
+        tabela[i] = {
+            tki: tki(i),
+            aki: aki(i),
+            fun1: fun1(i),
+            deriv1: deriv1(i),
+            // fun2: fun2(i),
+            // deriv2: deriv2(i),
+            // fun3: fun3(i),
+            // deriv3: deriv3(i),
+            // fun4: fun4(i),
+            // deriv4: deriv4(i),
+            // fun5: fun5(i),
+            // deriv5: deriv5(i),
+        }
     }
+
+    const fun1Sum = tabela.reduce(function (total, row) {
+        return total + row.fun1
+    }, 0)
+
+    const deriv1Sum = tabela.reduce(function (total, row) {
+        return total + row.deriv1
+    }, 0)
+
+    const oprocentowanie2 = percent - (fun1Sum / deriv1Sum);
+
+
+    const fun2Sum = tabela.reduce(function (total, row) {
+        return total + row.fun2
+    }, 0)
+
+    const deriv2Sum = tabela.reduce(function (total, row) {
+        return total + row.deriv2
+    }, 0)
+
+    const oprocentowanie3 = oprocentowanie2 - (fun2Sum / deriv2Sum)
+
+
+    const fun3Sum = tabela.reduce(function (total, row) {
+        return total + row.fun3
+    }, 0)
+
+    const deriv3Sum = tabela.reduce(function (total, row) {
+        return total + row.deriv3
+    }, 0)
+
+    const oprocentowanie4 = oprocentowanie3 - (fun3Sum / deriv3Sum)
+
+    const fun4Sum = tabela.reduce(function (total, row) {
+        return total + row.fun4
+    }, 0)
+
+    const deriv4Sum = tabela.reduce(function (total, row) {
+        return total + row.deriv4
+    }, 0)
+
+    const oprocentowanie5 = oprocentowanie4 - (fun4Sum / deriv4Sum)
+
+    tabela.forEach((row, i) => {
+        tabela[i].fun2 = fun2(i, oprocentowanie2)
+        tabela[i].deriv2 = deriv2(i, oprocentowanie2)
+        tabela[i].fun3 = fun3(i, oprocentowanie3)
+        tabela[i].deriv3 = deriv3(i, oprocentowanie3)
+        tabela[i].fun4 = fun4(i, oprocentowanie4)
+        tabela[i].deriv4 = deriv4(i, oprocentowanie4)
+        tabela[i].fun5 = fun5(i, oprocentowanie5)
+        tabela[i].deriv5 = deriv5(i, oprocentowanie5)
+    });
 }
-
-let fun1Sum = tabela.reduce(function(total, row) {
-    return total + row.fun1
-}, 0)
-
-let deriv1Sum = tabela.reduce(function(total, row) {
-    return total + row.deriv1
-}, 0)
-
-let oprocentowanie2 = percent - (fun1Sum / deriv1Sum);
-
-tabela.forEach((row, i) => {
-    tabela[i].fun2 = fun2(i, oprocentowanie2)
-    tabela[i].deriv2 = deriv2(i, oprocentowanie2)
-})
-
-
-let fun2Sum = tabela.reduce(function(total, row) {
-    return total + row.fun2
-}, 0)
-
-let deriv2Sum = tabela.reduce(function(total, row) {
-    return total + row.deriv2
-}, 0)
-
-let oprocentowanie3 = oprocentowanie2 - (fun2Sum / deriv2Sum)
-
-tabela.forEach((row, i) => {
-    tabela[i].fun3 = fun3(i, oprocentowanie3)
-    tabela[i].deriv3 = deriv3(i, oprocentowanie3)
-})
-
-
-let fun3Sum = tabela.reduce(function(total, row) {
-    return total + row.fun3
-}, 0)
-
-let deriv3Sum = tabela.reduce(function(total, row) {
-    return total + row.deriv3
-}, 0)
-
-let oprocentowanie4 = oprocentowanie3 - (fun3Sum / deriv3Sum)
-
-tabela.forEach((row, i) => {
-    tabela[i].fun4 = fun4(i, oprocentowanie4)
-    tabela[i].deriv4 = deriv4(i, oprocentowanie4)
-})
-
-let fun4Sum = tabela.reduce(function(total, row) {
-    return total + row.fun4
-}, 0)
-
-let deriv4Sum = tabela.reduce(function(total, row) {
-    return total + row.deriv4
-}, 0)
-
-let oprocentowanie5 = oprocentowanie4 - (fun4Sum / deriv4Sum)
-
-tabela.forEach((row, i) => {
-    tabela[i].fun5 = fun5(i, oprocentowanie5)
-    tabela[i].deriv5 = deriv5(i, oprocentowanie5)
-})
-
-let fun5Sum = tabela.reduce(function(total, row) {
-    return total + row.fun5
-}, 0)
-
-let deriv5Sum = tabela.reduce(function(total, row) {
-    return total + row.deriv5
-}, 0)
-
-}
-
-init(period, netValue, percent, monthlyRate)
-
-
